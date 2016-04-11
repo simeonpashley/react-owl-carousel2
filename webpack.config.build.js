@@ -1,40 +1,19 @@
 var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
-var minimize = process.argv.indexOf('--minimize') !== -1;
 
 var config = {
-	devtool: 'eval',
+	devtool: 'source-map',
 	entry:  {
-		OwlCarousel: './components/OwlCarousel.jsx'
+		app: './index.jsx'
 	},
 	resolve: {
 		extensions: ["", ".jsx", ".js"],
 	},
 	output: {
-		path: path.join(__dirname, "lib"),
-		filename: "[name].js",
-		library: ["react-owl-carousel"],
-		libraryTarget: "umd"
+		path: path.join(__dirname, "public"),
+		filename: "js/[name].min.js",
 	},
-	externals: [
-		{
-			'react': {
-				root: 'React',
-				commonjs2: 'react',
-				commonjs: 'react',
-				amd: 'react'
-			}
-		},
-		{
-			'react-dom': {
-				root: 'ReactDOM',
-				commonjs2: 'react-dom',
-				commonjs: 'react-dom',
-				amd: 'react-dom'
-			}
-		},
-	],
 	plugins: [
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.DefinePlugin({
@@ -43,13 +22,17 @@ var config = {
 			}
 		}),
 		new webpack.optimize.DedupePlugin(),
+		new webpack.optimize.UglifyJsPlugin({
+			compressor: {
+				warnings: false
+			}
+		})
 	],
 	module: {
 		loaders: [
 			{
 				test: /\.(js|jsx)$/,
 				loaders: ['babel'],
-				include: [path.join(__dirname, 'components'), path.join(__dirname, 'src')],
 				exclude: path.join(__dirname, 'node_modules'),
 			},
 			{
@@ -59,7 +42,6 @@ var config = {
 					'css-loader',
 					'postcss-loader',
 				],
-				include: [path.join(__dirname, 'src')],
 			},
 		],
 
@@ -69,17 +51,5 @@ var config = {
 		return [autoprefixer];
 	},
 };
-
-if (minimize) {
-	config.plugins.push(
-		new webpack.optimize.UglifyJsPlugin({
-			compressor: {
-				warnings: false
-			}
-		})
-	);
-	config.devtool = 'source-map';
-	config.output.filename = "[name].min.js";
-}
 
 module.exports = config;

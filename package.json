@@ -4,11 +4,9 @@
   "description": "React.js + Owl Carousel",
   "main": "lib/OwlCarousel.js",
   "scripts": {
-    "clean": "rimraf lib",
-    "build:uncompressed": "cross-env NODE_ENV=production webpack --config webpack.config.build.js",
-    "build:minified": "cross-env NODE_ENV=production webpack --config webpack.config.build.js --minimize",
-    "build": "npm run clean && npm run build:uncompressed && npm run build:minified ",
-    "start": "node devServer.js"
+    "clean": "rimraf public/js",
+    "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.build.js",
+    "build": "npm run clean && npm run build:webpack"
   },
   "repository": {
     "type": "git",
