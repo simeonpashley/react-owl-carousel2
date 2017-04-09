@@ -1,95 +1,145 @@
 'use strict';
 
-import React, {PropTypes} from 'react';
-import {findDOMNode} from 'react-dom';
+import React from 'react';
+import { findDOMNode } from 'react-dom';
+import { PropTypes } from 'prop-types';
 import '../src/owl.carousel.css';
 import '../src/owl.carousel.js';
 
-const Owl_Carousel_Options = [
-	'items',
-	'itemsDesktop',
-	'itemsDesktopSmall',
-	'itemsTablet',
-	'itemsTabletSmall',
-	'itemsMobile',
-	'itemsCustom',
-	'singleItem',
-	'itemsScaleUp',
-	'slideSpeed',
-	'paginationSpeed',
-	'rewindNav',
-	'rewindSpeed',
-	'autoPlay',
-	'stopOnHover',
-	'navigation',
-	'navigationText',
-	'scrollPerPage',
-	'pagination',
-	'paginationNumbers',
-	'responsive',
-	'responsiveRefreshRate',
-	'responsiveBaseWidth',
-	'baseClass',
-	'theme',
-	'lazyLoad',
-	'lazyFollow',
-	'lazyEffect',
-	'autoHeight',
-	'jsonPath',
-	'jsonSuccess',
-	'dragBeforeAnimFinish',
-	'mouseDrag',
-	'touchDrag',
-	'addClassActive',
-	'transitionStyle'
-];
+const owlCarouselOptions = {
+	core: [
+		'items',
+		'loop',
+		'center',
+		'rewind',
 
-/**
-* http://owlgraphic.com/owlcarousel/demos/one.html
-*
-* Method
-*		next()
-*		prev()
-*		goTo(x)
-*		jumpTo(x)
-*		play()
-*		stop()
-*/
+		'mouseDrag',
+		'touchDrag',
+		'pullDrag',
+		'freeDrag',
+
+		'margin',
+		'stagePadding',
+
+		'merge',
+		'mergeFit',
+		'autoWidth',
+
+		'startPosition',
+		'rtl',
+
+		'smartSpeed',
+		'fluidSpeed',
+		'dragEndSpeed',
+
+		'responsive',
+		'responsiveRefreshRate',
+		'responsiveBaseElement',
+
+		'fallbackEasing',
+
+		'info',
+
+		'nestedItemSelector',
+		'itemElement',
+		'stageElement',
+
+		'refreshClass',
+		'loadedClass',
+		'loadingClass',
+		'rtlClass',
+		'responsiveClass',
+		'dragClass',
+		'itemClass',
+		'stageClass',
+		'stageOuterClass',
+		'grabClass'
+	],
+	autorefresh: [
+		'autoRefresh',
+		'autoRefreshInterval'
+	],
+	lazy: [
+		'lazyLoad'
+	],
+	autoHeight: [
+		'autoHeight',
+		'autoHeightClass'
+	],
+	video: [
+		'video',
+		'videoHeight',
+		'videoWidth'
+	],
+	animate: [
+		'animateOut',
+		'animateIn'
+	],
+	autoplay: [
+		'autoplay',
+		'autoplayTimeout',
+		'autoplayHoverPause',
+		'autoplaySpeed'
+	],
+	navigation: [
+		'nav',
+		'navText',
+		'navSpeed',
+		'navElement',
+		'navContainer',
+		'navContainerClass',
+		'navClass',
+		'slideBy',
+		'dotClass',
+		'dotsClass',
+		'dots',
+		'dotsEach',
+		'dotsData',
+		'dotsSpeed',
+		'dotsContainer'
+	],
+	hash: [
+		'URLhashListener'
+	]
+
+};
 
 class OwlCarousel extends React.Component {
 	constructor(props, context) {
 		super(props, context);
 
-		this.next = () => $(findDOMNode(this)).data('owlCarousel').next();
-		this.prev = () => $(findDOMNode(this)).data('owlCarousel').prev();
-		this.goTo = (x) => $(findDOMNode(this)).data('owlCarousel').goTo(x);
-		this.jumpTo = (x) => $(findDOMNode(this)).data('owlCarousel').jumpTo(x);
-		this.play = () => $(findDOMNode(this)).data('owlCarousel').play();
-		this.stop = () => $(findDOMNode(this)).data('owlCarousel').stop();
+		this.next = () => this.$car.next();
+		this.prev = () => this.$car.prev();
+		this.goTo = (x) => this.$car.to(x);
 	}
 
 	componentDidMount() {
 		$(findDOMNode(this)).owlCarousel(this.getOptions());
+		this.$car = $(findDOMNode(this)).data('owl.carousel');
 	}
 
 	componentWillReceiveProps(nextProps) {
-		$(findDOMNode(this)).data('owlCarousel').destroy();
+		$(findDOMNode(this)).data('owl.carousel').destroy();
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		$(findDOMNode(this)).owlCarousel(this.getOptions());
+		this.$car = $(findDOMNode(this)).data('owl.carousel');
 	}
 
 	componentWillUnmount() {
-		$(findDOMNode(this)).data('owlCarousel').destroy();
+		$(findDOMNode(this)).data('owl.carousel').destroy();
 	}
 
 	getOptions() {
 		const options = {};
 
-		Owl_Carousel_Options.forEach(val => {
-			if (this.props[val]) {
-				options[val] = this.props[val];
+		let carOptions = Object.values(owlCarouselOptions)
+			.reduce((a, v) => a.concat(v), []);
+
+		carOptions.forEach(val => {
+			if (val in this.props.options) {
+				options[val] = this.props.options[val];
 			}
 		});
 
@@ -98,49 +148,13 @@ class OwlCarousel extends React.Component {
 
 	render() {
 		const {
-			items,
-			itemsDesktop,
-			itemsDesktopSmall,
-			itemsTablet,
-			itemsTabletSmall,
-			itemsMobile,
-			itemsCustom,
-			singleItem,
-			itemsScaleUp,
-			slideSpeed,
-			paginationSpeed,
-			rewindNav,
-			rewindSpeed,
-			autoPlay,
-			stopOnHover,
-			navigation,
-			navigationText,
-			scrollPerPage,
-			pagination,
-			paginationNumbers,
-			responsive,
-			responsiveRefreshRate,
-			responsiveBaseWidth,
-			baseClass,
-			theme,
-			lazyLoad,
-			lazyFollow,
-			lazyEffect,
-			autoHeight,
-			jsonPath,
-			jsonSuccess,
-			dragBeforeAnimFinish,
-			mouseDrag,
-			touchDrag,
-			addClassActive,
-			transitionStyle,
+			options,
 			children,
-			className,
 			...props,
 		} = this.props;
 
 		return (
-			<div {...props}>
+			<div className='owl-carousel owl-theme' {...props}>
 				{children}
 			</div>
 		);
@@ -148,83 +162,112 @@ class OwlCarousel extends React.Component {
 }
 
 OwlCarousel.propTypes = {
-	children : PropTypes.oneOfType([
+	children: PropTypes.oneOfType([
 		PropTypes.element,
 		PropTypes.arrayOf(PropTypes.element.isRequired),
 	]).isRequired,
 
-	style : PropTypes.object,
-	id : PropTypes.string,
+	style: PropTypes.object,
+	id: PropTypes.string,
 
-	items : PropTypes.number,
-	itemsCustom : PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number).isRequired),
-	itemsDesktop : PropTypes.arrayOf(PropTypes.number.isRequired),
-	itemsDesktopSmall : PropTypes.arrayOf(PropTypes.number.isRequired),
-	itemsTablet : PropTypes.arrayOf(PropTypes.number.isRequired),
-	itemsTabletSmall : PropTypes.arrayOf(PropTypes.number.isRequired),
-	itemsMobile : PropTypes.arrayOf(PropTypes.number.isRequired),
-	singleItem : PropTypes.bool,
-	itemsScaleUp : PropTypes.bool,
+	options: PropTypes.shape({
+		// core
+		items: PropTypes.number,
+		loop: PropTypes.bool,
+		center: PropTypes.bool,
+		rewind: PropTypes.bool,
 
-	slideSpeed : PropTypes.number,
-	paginationSpeed : PropTypes.number,
-	rewindSpeed : PropTypes.number,
+		mouseDrag: PropTypes.bool,
+		touchDrag: PropTypes.bool,
+		pullDrag: PropTypes.bool,
+		freeDrag: PropTypes.bool,
 
-	autoPlay : PropTypes.oneOfType([
-		PropTypes.bool,
-		PropTypes.number,
-	]),
-	stopOnHover : PropTypes.bool,
+		margin: PropTypes.number,
+		stagePadding: PropTypes.number,
 
-	navigation : PropTypes.bool,
-	navigationText : PropTypes.arrayOf(PropTypes.string),
-	rewindNav : PropTypes.bool,
-	scrollPerPage : PropTypes.bool,
+		merge: PropTypes.bool,
+		mergeFit: PropTypes.bool,
+		autoWidth: PropTypes.bool,
 
-	pagination : PropTypes.bool,
-	paginationNumbers : PropTypes.bool,
+		startPosition: PropTypes.number,
+		rtl: PropTypes.bool,
 
-	responsive : PropTypes.bool,
-	responsiveRefreshRate : PropTypes.number,
-	responsiveBaseWidth : function(props, propName, componentName) {
-		if (
-			props[propName] &&
-			!$(props[propName]).length
-		) {
-			return new Error('React-owl-carousel: the props `responsiveBaseWidth` needs jQuery selector.');
-		}
-	},
+		smartSpeed: PropTypes.number,
+		fluidSpeed: PropTypes.bool,
+		dragEndSpeed: PropTypes.bool,
 
-	baseClass : PropTypes.string,
-	theme : PropTypes.string,
+		responsive: PropTypes.oneOfType([
+			PropTypes.bool,
+			PropTypes.object,
+		]),
+		responsiveRefreshRate: PropTypes.number,
+		responsiveBaseElement: PropTypes.object,
 
-	lazyLoad : PropTypes.bool,
-	lazyFollow : PropTypes.bool,
-	lazyEffect : PropTypes.bool,
+		fallbackEasing: PropTypes.string,
 
-	autoHeight : PropTypes.bool,
+		info: PropTypes.bool,
 
-	jsonPath : PropTypes.string,
-	jsonSuccess : PropTypes.func,
+		nestedItemSelector: PropTypes.bool,
+		itemElement: PropTypes.string,
+		stageElement: PropTypes.string,
 
-	dragBeforeAnimFinish : PropTypes.bool,
-	mouseDrag : PropTypes.bool,
-	touchDrag : PropTypes.bool,
+		refreshClass: PropTypes.string,
+		loadedClass: PropTypes.string,
+		loadingClass: PropTypes.string,
+		rtlClass: PropTypes.string,
+		responsiveClass: PropTypes.string,
+		dragClass: PropTypes.string,
+		itemClass: PropTypes.string,
+		stageClass: PropTypes.string,
+		stageOuterClass: PropTypes.string,
+		grabClass: PropTypes.string,
 
-	addClassActive : PropTypes.bool,
+		// autoRefresh
+		autoRefresh: PropTypes.bool,
+		autoRefreshInterval: PropTypes.number,
 
-	//build-in transitionStyle: 'fade', 'backSlide', 'goDown', 'scaleUp'
-	transitionStyle : PropTypes.string,
+		// lazy
+		lazyLoad: PropTypes.bool,
 
-	beforeUpdate : PropTypes.func,
-	afterUpdate : PropTypes.func,
-	beforeInit : PropTypes.func,
-	afterInit : PropTypes.func,
-	beforeMove : PropTypes.func,
-	afterMove : PropTypes.func,
-	afterAction : PropTypes.func,
-	startDragging : PropTypes.func,
-	afterLazyLoad: PropTypes.func,
+		// autoHeight
+		autoHeight: PropTypes.bool,
+		autoHeightClass: PropTypes.string,
+
+		// video
+		video: PropTypes.bool,
+		videoHeight: PropTypes.bool,
+		videoWidth: PropTypes.bool,
+
+		// animate
+		animateOut: PropTypes.bool,
+		animateIn: PropTypes.bool,
+
+		// autoplay
+		autoplay: PropTypes.bool,
+		autoplayTimeout: PropTypes.number,
+		autoplayHoverPause: PropTypes.bool,
+		autoplaySpeed: PropTypes.bool,
+
+		// navigation
+		nav: PropTypes.bool,
+		navText: PropTypes.array,
+		navSpeed: PropTypes.bool,
+		navElement: PropTypes.string,
+		navContainer: PropTypes.bool,
+		navContainerClass: PropTypes.string,
+		navClass: PropTypes.array,
+		slideBy: PropTypes.number,
+		dotClass: PropTypes.string,
+		dotsClass: PropTypes.string,
+		dots: PropTypes.bool,
+		dotsEach: PropTypes.bool,
+		dotsData: PropTypes.bool,
+		dotsSpeed: PropTypes.bool,
+		dotsContainer: PropTypes.bool,
+
+		// hash
+		URLhashListener: PropTypes.bool
+	})
 };
 
 export default OwlCarousel;
