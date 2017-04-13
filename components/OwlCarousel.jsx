@@ -114,21 +114,22 @@ class OwlCarousel extends React.Component {
 	}
 
 	componentDidMount() {
-		$(findDOMNode(this)).owlCarousel(this.getOptions());
-		this.$car = $(findDOMNode(this)).data('owl.carousel');
+		this.$node = $(findDOMNode(this));
+		this.$node.owlCarousel(this.getOptions());
+		this.$car = this.$node.data('owl.carousel');
 	}
 
 	componentWillReceiveProps(nextProps) {
-		$(findDOMNode(this)).data('owl.carousel').destroy();
+		this.$node.data('owl.carousel').destroy();
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		$(findDOMNode(this)).owlCarousel(this.getOptions());
-		this.$car = $(findDOMNode(this)).data('owl.carousel');
+		this.$node.owlCarousel(this.getOptions());
+		this.$car = this.$node.data('owl.carousel');
 	}
 
 	componentWillUnmount() {
-		$(findDOMNode(this)).data('owl.carousel').destroy();
+		this.$node.data('owl.carousel').destroy();
 	}
 
 	getOptions() {

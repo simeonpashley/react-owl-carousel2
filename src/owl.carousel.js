@@ -465,6 +465,10 @@
 
 		this.$element.addClass(this.options.loadingClass);
 
+		// HACK: DISABLE SCROLLBAR
+		var overflowVal = $('body').css('overflow');
+		$('body').css({'overflow': 'hidden'});
+
 		// create stage
 		this.$stage = $('<' + this.settings.stageElement + ' class="' + this.settings.stageClass + '"/>')
 			.wrap('<div class="' + this.settings.stageOuterClass + '"/>');
@@ -483,6 +487,9 @@
 			// invalidate width
 			this.invalidate('width');
 		}
+
+		// HACK: RESTORE SCROLLBAR
+		$('body').css({'overflow': overflowVal});
 
 		this.$element
 			.removeClass(this.options.loadingClass)
