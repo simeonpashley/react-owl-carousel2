@@ -5,6 +5,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import OwlCarousel from './lib/OwlCarousel.js';
+import './src/owl.theme.default.css';
 import './style.css';
 
 class App extends React.Component {
@@ -18,12 +19,24 @@ class App extends React.Component {
 				<div key={3} className="item"><img src="./public/img/fullimage3.jpg" alt="Mirror Edge"/></div>,
 			],
 
-			navigation : true, // Show next and prev buttons
-			slideSpeed : 300,
-			paginationSpeed : 400,
-			singleItem : true,
-			autoPlay : true,
+			itemNo: 1,
+			loop: false,
+			nav: false,
+			rewind: true,
+			autoplay: true
 		};
+	}
+
+	startPlay() {
+		this.setState({
+			autoplay: true
+		});
+	}
+
+	stopPlay() {
+		this.setState({
+			autoplay: false
+		});
 	}
 
 	addItem() {
@@ -34,45 +47,45 @@ class App extends React.Component {
 
 	newOptions() {
 		this.setState({
-			navigation : false, // Show next and prev buttons
+			nav: true // Show next and prev buttons
 		});
 	}
 
 	render() {
+		const options = {
+			items: this.state.itemNo,
+			loop: this.state.loop,
+			nav: this.state.nav,
+			rewind: this.state.rewind,
+			autoplay: this.state.autoplay
+		};
+
 		return (
 			<div>
 				<OwlCarousel
 					ref="car"
-					navigation={this.state.navigation}
-					slideSpeed={this.state.slideSpeed}
-					paginationSpeed={this.state.paginationSpeed}
-					singleItem={this.state.singleItem}
-					autoPlay={this.state.autoPlay}
+					options={options}
 				>
 					{this.state.items}
 				</OwlCarousel>
 
-				<button onClick={() => this.this.refs.car.prev()}>
+				<button onClick={() => this.refs.car.prev()}>
 					prev
 				</button>
 
-				<button onClick={() => this.this.refs.car.next()}>
+				<button onClick={() => this.refs.car.next()}>
 					next
 				</button>
 
-				<button onClick={() => this.this.refs.car.goTo(0)}>
+				<button onClick={() => this.refs.car.goTo(0)}>
 					goTo
 				</button>
 
-				<button onClick={() => this.this.refs.car.jumpTo(0)}>
-					jumpTo
-				</button>
-
-				<button onClick={() => this.this.refs.car.play()}>
+				<button onClick={this.startPlay.bind(this)}>
 					play
 				</button>
 
-				<button onClick={() => this.this.refs.car.stop()}>
+				<button onClick={this.stopPlay.bind(this)}>
 					stop
 				</button>
 
