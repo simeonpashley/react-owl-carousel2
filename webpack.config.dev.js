@@ -14,8 +14,8 @@ var config = {
 	resolve: {
 		extensions: ["", ".jsx", ".js"],
 		alias: {
-			'react-owl-carousel': path.join(__dirname, 'components/OwlCarousel.jsx'),
-			'react-owl-carousel/lib': path.join(__dirname, 'components'),
+			'react-owl-carousel2': path.join(__dirname, 'components/OwlCarousel.jsx'),
+			'react-owl-carousel2/lib': path.join(__dirname, 'components'),
 		},
 	},
 	output: {

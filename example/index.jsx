@@ -4,7 +4,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import OwlCarousel from 'react-owl-carousel';
+import OwlCarousel from 'react-owl-carousel2';
 import '../src/owl.theme.default.css';
 import './style.css';
 
