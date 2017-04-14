@@ -1,8 +1,7 @@
 'use strict';
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
-import { PropTypes } from 'prop-types';
 import '../src/owl.carousel.css';
 import '../src/owl.carousel.js';
 
