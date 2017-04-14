@@ -1,7 +1,9 @@
 {
-  "name": "react-owl-carousel",
-  "version": "0.14.0",
-  "description": "React.js + Owl Carousel",
+  "name": "react-owl-carousel2",
+  "version": "0.0.1",
+  "description": "React.js + Owl Carousel 2",
+  "author": "Florin Nitoi <florin.nitoi@gmail.com>",
+  "license": "ISC",
   "main": "lib/OwlCarousel.js",
   "scripts": {
     "clean": "rimraf public/js",
@@ -10,19 +12,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/seal789ie/react-owl-carousel.git"
+    "url": "git+https://github.com/florinn/react-owl-carousel2.git"
   },
   "keywords": [
     "react",
+    "carousel",
     "OwlCarousel",
+    "slider",
     "gallery"
   ],
-  "author": "xhriman",
-  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/seal789ie/react-owl-carousel/issues"
+    "url": "https://github.com/florinn/react-owl-carousel2/issues"
   },
-  "homepage": "https://github.com/seal789ie/react-owl-carousel#readme",
+  "homepage": "https://github.com/florinn/react-owl-carousel2#readme",
   "peerDependencies": {
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
