@@ -28,8 +28,8 @@
   },
   "homepage": "https://github.com/florinn/react-owl-carousel2#readme",
   "peerDependencies": {
-    "react": "^14.0.0",
-    "react-dom": "^14.0.0"
+    "react": "^14.0.0 || ^15.0.0",
+    "react-dom": "^14.0.0 || ^15.0.0"
   },
   "devDependencies": {
     "autoprefixer": "~6.3.1",
