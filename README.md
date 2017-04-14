@@ -1,12 +1,16 @@
-# react-owl-carousel  [![npm version](https://img.shields.io/npm/v/react-owl-carousel.svg?style=flat)](https://www.npmjs.com/package/react-owl-carousel)
-[React](http://facebook.github.io/react/) + [Owl Carousel 1.3](http://owlgraphic.com/owlcarousel/)
+# react-owl-carousel2
+[React](http://facebook.github.io/react/) + [Owl Carousel 2](https://owlcarousel2.github.io/OwlCarousel2/)
 
-### 1.Getting Started
-##### You need to load jQuery(1.7+) manually
+
+## 1.Installation
+
+```
+npm install react-owl-carousel2
+```
 
 ```html
 <!-- Load jQuery(1.7+) -->
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
 <!-- Customized Style -->
 <link rel="stylesheet" href="owl-carousel/owl.theme.css">
@@ -14,14 +18,23 @@
 
 ```jsx
 import React from 'react';
-import OwlCarousel from 'react-owl-carousel';
+import OwlCarousel from 'react-owl-carousel2';
 ```
 
-### 2.Set up your javascript
-wrap your divs inside the OwlCarousel component
+
+## 2.Usage
+
+```javascript
+const options = {
+    items: 1,
+    nav: true,
+    rewind: true,
+    autoplay: true
+};
+```
 
 ```jsx
-<OwlCarousel slideSpeed={300} navigation singleItem autoPlay >
+<OwlCarousel ref="car" options={options} >
 	<div><img src="/img/fullimage1.jpg" alt="The Last of us"/></div>
 	<div><img src="/img/fullimage2.jpg" alt="GTA V"/></div>
 	<div><img src="/img/fullimage3.jpg" alt="Mirror Edge"/></div>
@@ -29,54 +42,272 @@ wrap your divs inside the OwlCarousel component
 ```
 
 
-## OwlCarousel Props (Options of owl-carousel)
+### Methods
 
-[docs] (http://owlgraphic.com/owlcarousel/demos/one.html)
+* prev ()
+```jsx
+<button onClick={() => this.refs.car.prev()}>prev</button>
+```
 
-| Name   |      Type      |  Descrption |
-|:----------:|:-------------:|:------|
-| items |  number | This variable allows you to set the maximum amount of items displayed at a time with the widest browser width |
-| itemsDesktop | array | This allows you to preset the number of slides visible with a particular browser width. The format is [x,y] whereby x=browser width and y=number of slides displayed. <br />For example [1199,4] means that if(window<=1199){show 4 slides per page} Alternatively use itemsDesktop: false to override these settings. |
-| itemsDesktopSmall | array | As above |
-| itemsTablet | array | As above |
-| itemsTabletSmall | array | As above |
-| itemsMobile | array | As above |
-| itemsCustom | array | array.	This allow you to add custom variations of items depending from the width. If this option is set, itemsDeskop, itemsDesktopSmall, itemsTablet, itemsMobile etc. are disabled. For better preview, order the arrays by screen size, but it's not mandatory. Don't forget to include the lowest available screen size, otherwise it will take the default one for screens lower than lowest available. <br />Example: [[0, 2], [400, 4], [700, 6], [1000, 8], [1200, 10], [1600, 16]] |
-| singleItem | boolean |  |
-| itemsScaleUp | boolean | Option to not stretch items when it is less than the supplied items |
-| slideSpeed | number | Slide speed in milliseconds. |
-| paginationSpeed | number | Pagination speed in milliseconds. |
-| rewindNav | boolean | Slide to first item. Use rewindSpeed to change animation speed. |
-| rewindSpeed | number | Rewind speed in milliseconds. |
-| autoPlay | boolean / number | Change to any integrer for example autoPlay : 5000 to play every 5 seconds. <br />If you set autoPlay: true default speed will be 5 seconds. |
-| stopOnHover | boolean | Stop autoplay on mouse hover |
-| navigation | boolean | Display "next" and "prev" buttons. |
-| navigationText | [array of element] / boolean | You can customize your own navigation. <br />To get empty buttons use navigationText : false. Also HTML can be used here. |
-| scrollPerPage | boolean | Scroll per page not per item. This affect next/prev buttons and mouse/touch dragging. |
-| pagination | boolean | Show pagination. |
-| paginationNumbers | boolean | Show numbers inside pagination buttons. |
-| responsive | boolean | Change that to "false" to disable resposive capabilities |
-| responsiveRefreshRate | number | Check window width changes every 200ms for responsive actions |
-| responsiveBaseWidth | jQuery selector | Owl Carousel check window for browser width changes. |
-| baseClass | string | Automaticly added class for base CSS styles. |
-| theme | string | Default Owl CSS styles for navigation and buttons. Change it to match your own theme. |
-| lazyLoad | boolean | Delays loading of images. Images outside of viewport won't be loaded before user scrolls to them. Great for mobile devices to speed up page loadings. IMG need special markup class="lazyOwl" and data-src="your img path". |
-| lazyFollow | boolean | When pagination used, it skips loading the images from pages that got skipped. It only loads the images that get displayed in viewport. If set to false, all images get loaded when pagination used. It is a sub setting of the lazy load function. |
-| lazyEffect | boolean / one of 'fade', 'backSlide', 'goDown', 'scaleUp' | Default is fadeIn on 400ms speed. Use false to remove that effect. |
-| autoHeight | boolean | Add height to owl-wrapper-outer so you can use diffrent heights on slides. Use it only for one item per page setting. |
-| jsonPath | string | Allows you to load directly from a JSON file. The JSON structure you use needs to match the owl JSON structure used here. To use custom JSON structure see jsonSuccess option. |
-| jsonSuccess | function | Success callback for $.getJSON build in into carousel. |
-| dragBeforeAnimFinish | boolean | Ignore whether a transition is done or not (only dragging).|
-| mouseDrag | boolean | Turn off/on mouse events. |
-| touchDrag | boolean | Turn off/on touch events. |
-| addClassActive | boolean | Add "active" classes on visible items. Works with any numbers of items on screen. |
-| transitionStyle | string | Add CSS3 transition style. Works only with one item on screen. |
+* next ()
+```jsx
+<button onClick={() => this.refs.car.next()}>next</button>
+```
+
+* goTo (page)
+```jsx
+<button onClick={() => this.refs.car.goTo(0)}>goTo</button>
+```
 
 
-## OwlCarousel Method
-*		next ()
-*		prev ()
-*		goTo (page)
-*		jumpTo (page)
-*		play ()
-*		stop ()
+### Options
+
+>List including all options from built-in plugins video, lazyload, autoheight and animate.
+
+<article>
+<h4 id="items">items</h4>
+<p>Type: <code>Number</code>
+  <br> Default: <code>3</code></p>
+<p>The number of items you want to see on the screen.</p>
+<hr>
+<h4 id="margin">margin</h4>
+<p>Type: <code>Number</code>
+  <br> Default: <code>0</code></p>
+<p>margin-right(px) on item.</p>
+<hr>
+<h4 id="loop">loop</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Infinity loop. Duplicate last and first items to get loop illusion.</p>
+<hr>
+<h4 id="center">center</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Center item. Works well with even an odd number of items.</p>
+<hr>
+<h4 id="mousedrag">mouseDrag</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>true</code></p>
+<p>Mouse drag enabled.</p>
+<hr>
+<h4 id="touchdrag">touchDrag</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>true</code></p>
+<p>Touch drag enabled.</p>
+<hr>
+<h4 id="pulldrag">pullDrag</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>true</code></p>
+<p>Stage pull to edge.</p>
+<hr>
+<h4 id="freedrag">freeDrag</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Item pull to edge.</p>
+<hr>
+<h4 id="stagepadding">stagePadding</h4>
+<p>Type: <code>Number</code>
+  <br> Default: <code>0</code></p>
+<p>Padding left and right on stage (can see neighbours).</p>
+<hr>
+<h4 id="merge">merge</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Merge items. Looking for data-merge='{number}' inside item..</p>
+<hr>
+<h4 id="mergefit">mergeFit</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>true</code></p>
+<p>Fit merged items if screen is smaller than items value.</p>
+<hr>
+<h4 id="autowidth">autoWidth</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Set non grid content. Try using width style on divs.</p>
+<hr>
+<h4 id="startposition">startPosition</h4>
+<p>Type: <code>Number/String</code>
+  <br> Default: <code>0</code></p>
+<p>Start position or URL Hash string like '#id'.</p>
+<hr>
+<h4 id="urlhashlistener">URLhashListener</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Listen to url hash changes. data-hash on items is required.</p>
+<hr>
+<h4 id="nav">nav</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Show next/prev buttons.</p>
+<hr>
+<h4 id="rewind">rewind</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>true</code></p>
+<p>Go backwards when the boundary has reached.</p>
+<hr>
+<h4 id="navtext">navText</h4>
+<p>Type: <code>Array</code>
+  <br> Default: <code>[&amp;#x27;next&amp;#x27;,&amp;#x27;prev&amp;#x27;]</code></p>
+<p>HTML allowed.</p>
+<hr>
+<h4 id="navelement">navElement</h4>
+<p>Type: <code>String</code>
+  <br> Default: <code>div</code></p>
+<p>DOM element type for a single directional navigation link.</p>
+<hr>
+<h4 id="slideby">slideBy</h4>
+<p>Type: <code>Number/String</code>
+  <br> Default: <code>1</code></p>
+<p>Navigation slide by x. 'page' string can be set to slide by page.</p>
+<hr>
+<h4 id="dots">dots</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>true</code></p>
+<p>Show dots navigation.</p>
+<hr>
+<h4 id="dotseach">dotsEach</h4>
+<p>Type: <code>Number/Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Show dots each x item.</p>
+<hr>
+<h4 id="dotdata">dotData</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Used by data-dot content.</p>
+<hr>
+<h4 id="lazyload">lazyLoad</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Lazy load images. data-src and data-src-retina for highres. Also load images into background inline style if element is not &lt;img&gt;</p>
+<hr>
+<h4 id="lazycontent">lazyContent</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>lazyContent was introduced during beta tests but i removed it from the final release due to bad implementation. It is a nice options so i will work on it in the nearest feature.</p>
+<hr>
+<h4 id="autoplay">autoplay</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Autoplay.</p>
+<hr>
+<h4 id="autoplaytimeout">autoplayTimeout</h4>
+<p>Type: <code>Number</code>
+  <br> Default: <code>5000</code></p>
+<p>Autoplay interval timeout.</p>
+<hr>
+<h4 id="autoplayhoverpause">autoplayHoverPause</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Pause on mouse hover.</p>
+<hr>
+<h4 id="smartspeed">smartSpeed</h4>
+<p>Type: <code>Number</code>
+  <br> Default: <code>250</code></p>
+<p>Speed Calculate. More info to come..</p>
+<hr>
+<h4 id="fluidspeed">fluidSpeed</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>Number</code></p>
+<p>Speed Calculate. More info to come..</p>
+<hr>
+<h4 id="autoplayspeed">autoplaySpeed</h4>
+<p>Type: <code>Number/Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>autoplay speed.</p>
+<hr>
+<h4 id="navspeed">navSpeed</h4>
+<p>Type: <code>Number/Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Navigation speed.</p>
+<hr>
+<h4 id="dotsspeed">dotsSpeed</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>Number/Boolean</code></p>
+<p>Pagination speed.</p>
+<hr>
+<h4 id="dragendspeed">dragEndSpeed</h4>
+<p>Type: <code>Number/Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Drag end speed.</p>
+<hr>
+<h4 id="callbacks">callbacks</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>true</code></p>
+<p>Enable callback events.</p>
+<hr>
+<h4 id="responsive">responsive</h4>
+<p>Type: <code>Object</code>
+  <br> Default: <code>empty object</code></p>
+<p>Object containing responsive options. Can be set to false to remove responsive capabilities.</p>
+<hr>
+<h4 id="responsiverefreshrate">responsiveRefreshRate</h4>
+<p>Type: <code>Number</code>
+  <br> Default: <code>200</code></p>
+<p>Responsive refresh rate.</p>
+<hr>
+<h4 id="responsivebaseelement">responsiveBaseElement</h4>
+<p>Type: <code>DOM element</code>
+  <br> Default: <code>window</code></p>
+<p>Set on any DOM element. If you care about non responsive browser (like ie8) then use it on main wrapper. This will prevent from crazy resizing.</p>
+<hr>
+<h4 id="video">video</h4>
+<p>Type: <code>Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Enable fetching YouTube/Vimeo/Vzaar videos.</p>
+<hr>
+<h4 id="videoheight">videoHeight</h4>
+<p>Type: <code>Number/Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Set height for videos.</p>
+<hr>
+<h4 id="videowidth">videoWidth</h4>
+<p>Type: <code>Number/Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Set width for videos.</p>
+<hr>
+<h4 id="animateout">animateOut</h4>
+<p>Type: <code>String/Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Class for CSS3 animation out.</p>
+<hr>
+<h4 id="animatein">animateIn</h4>
+<p>Type: <code>String/Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Class for CSS3 animation in.</p>
+<hr>
+<h4 id="fallbackeasing">fallbackEasing</h4>
+<p>Type: <code>String</code>
+  <br> Default: <code>swing</code></p>
+<p>Easing for CSS2 $.animate.</p>
+<hr>
+<h4 id="info">info</h4>
+<p>Type: <code>Function</code>
+  <br> Default: <code>false</code></p>
+<p>Callback to retrieve basic information (current item/pages/widths). Info function second parameter is Owl DOM object reference.</p>
+<hr>
+<h4 id="nesteditemselector">nestedItemSelector</h4>
+<p>Type: <code>String/Class</code>
+  <br> Default: <code>false</code></p>
+<p>Use it if owl items are deep nested inside some generated content. E.g 'youritem'. Dont use dot before class name.</p>
+<hr>
+<h4 id="itemelement">itemElement</h4>
+<p>Type: <code>String</code>
+  <br> Default: <code>div</code></p>
+<p>DOM element type for owl-item.</p>
+<hr>
+<h4 id="stageelement">stageElement</h4>
+<p>Type: <code>String</code>
+  <br> Default: <code>div</code></p>
+<p>DOM element type for owl-stage.</p>
+<hr>
+<h4 id="navcontainer">navContainer</h4>
+<p>Type: <code>String/Class/ID/Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Set your own container for nav.</p>
+<hr>
+<h4 id="dotscontainer">dotsContainer</h4>
+<p>Type: <code>String/Class/ID/Boolean</code>
+  <br> Default: <code>false</code></p>
+<p>Set your own container for nav.</p>
+<hr>
+</article>
