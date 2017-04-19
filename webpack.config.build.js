@@ -5,7 +5,7 @@ var minimize = process.argv.indexOf('--minimize') !== -1;
 
 var config = {
 	devtool: 'eval',
-	entry:  {
+	entry: {
 		OwlCarousel: './components/OwlCarousel.jsx'
 	},
 	resolve: {
@@ -17,24 +17,26 @@ var config = {
 		library: ["react-owl-carousel2"],
 		libraryTarget: "umd"
 	},
-	externals: [
-		{
-			'react': {
-				root: 'React',
-				commonjs2: 'react',
-				commonjs: 'react',
-				amd: 'react'
-			}
+	externals: {
+		'react': {
+			root: 'React',
+			commonjs2: 'react',
+			commonjs: 'react',
+			amd: 'react'
 		},
-		{
-			'react-dom': {
-				root: 'ReactDOM',
-				commonjs2: 'react-dom',
-				commonjs: 'react-dom',
-				amd: 'react-dom'
-			}
+		'react-dom': {
+			root: 'ReactDOM',
+			commonjs2: 'react-dom',
+			commonjs: 'react-dom',
+			amd: 'react-dom'
 		},
-	],
+		'prop-types': {
+			root: 'PropTypes',
+			commonjs2: 'prop-types',
+			commonjs: 'prop-types',
+			amd: 'prop-types'
+		},
+	},
 	plugins: [
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.DefinePlugin({
