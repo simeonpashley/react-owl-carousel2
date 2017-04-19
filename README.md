@@ -1,5 +1,5 @@
 # react-owl-carousel2
-[React](http://facebook.github.io/react/) + [Owl Carousel 2](https://owlcarousel2.github.io/OwlCarousel2/)
+[React](https://facebook.github.io/react/) + [Owl Carousel 2](https://owlcarousel2.github.io/OwlCarousel2/)
 
 
 ## 1.Installation
@@ -31,32 +31,19 @@ const options = {
     rewind: true,
     autoplay: true
 };
+
+const events = {
+    onDragged: function(event) {...},
+    onChanged: function(event) {...}
+};
 ```
 
 ```jsx
-<OwlCarousel ref="car" options={options} >
+<OwlCarousel ref="car" options={options} events={events} >
 	<div><img src="/img/fullimage1.jpg" alt="The Last of us"/></div>
 	<div><img src="/img/fullimage2.jpg" alt="GTA V"/></div>
 	<div><img src="/img/fullimage3.jpg" alt="Mirror Edge"/></div>
 </OwlCarousel>
-```
-
-
-### Methods
-
-* prev ()
-```jsx
-<button onClick={() => this.refs.car.prev()}>prev</button>
-```
-
-* next ()
-```jsx
-<button onClick={() => this.refs.car.next()}>next</button>
-```
-
-* goTo (page)
-```jsx
-<button onClick={() => this.refs.car.goTo(0)}>goTo</button>
 ```
 
 
@@ -311,3 +298,147 @@ const options = {
 <p>Set your own container for nav.</p>
 <hr>
 </article>
+
+
+### Events
+
+>List including all events of type 'attachable' from carousel, lazyload and built-in plugins video.
+
+<article>
+<h3 id="carousel">Carousel</h3>
+<h4 id="initialize-owl-carousel">initialize.owl.carousel</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onInitialize</code>
+  <br>
+</p>
+<p>When the plugin initializes.</p>
+<hr>
+<h4 id="initialized-owl-carousel">initialized.owl.carousel</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onInitialized</code>
+  <br>
+</p>
+<p>When the plugin has initialized.</p>
+<hr>
+<h4 id="resize-owl-carousel">resize.owl.carousel</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onResize</code>
+  <br>
+</p>
+<p>When the plugin gets resized.</p>
+<hr>
+<h4 id="resized-owl-carousel">resized.owl.carousel</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onResized</code>
+  <br>
+</p>
+<p>When the plugin has resized.</p>
+<hr>
+<h4 id="refresh-owl-carousel">refresh.owl.carousel</h4>
+<p>Type: <code>attachable, cancelable, triggerable</code>
+  <br>Callback: <code>onRefresh</code>
+  <br>Parameter: <code>[event, speed]</code>
+  <br>
+</p>
+<p>When the internal state of the plugin needs update.</p>
+<hr>
+<h4 id="refreshed-owl-carousel">refreshed.owl.carousel</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onRefreshed</code>
+  <br>
+</p>
+<p>When the internal state of the plugin has updated.</p>
+<hr>
+<h4 id="drag-owl-carousel">drag.owl.carousel</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onDrag</code>
+  <br>
+</p>
+<p>When the dragging of an item is started.</p>
+<hr>
+<h4 id="dragged-owl-carousel">dragged.owl.carousel</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onDragged</code>
+  <br>
+</p>
+<p>When the dragging of an item has finished.</p>
+<hr>
+<h4 id="translate-owl-carousel">translate.owl.carousel</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onTranslate</code>
+  <br>
+</p>
+<p>When the translation of the stage starts.</p>
+<hr>
+<h4 id="translated-owl-carousel">translated.owl.carousel</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onTranslated</code>
+  <br>
+</p>
+<p>When the translation of the stage has finished.</p>
+<hr>
+<h4 id="change-owl-carousel">change.owl.carousel</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onChange</code>
+  <br>Parameter: <code>property</code>
+  <br>
+</p>
+<p>When a property is going to change its value.</p>
+<hr>
+<h4 id="changed-owl-carousel">changed.owl.carousel</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onChanged</code>
+  <br>Parameter: <code>property</code>
+  <br>
+</p>
+<p>When a property has changed its value.</p>
+<hr>
+<h3 id="lazy">Lazy</h3>
+<h4 id="load-owl-lazy">load.owl.lazy</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onLoadLazy</code>
+  <br>
+</p>
+<p>When lazy image loads.</p>
+<hr>
+<h4 id="loaded-owl-lazy">loaded.owl.lazy</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onLoadedLazy</code>
+  <br>
+</p>
+<p>When lazy image has loaded.</p>
+<hr>
+<h3 id="video">Video</h3>
+<h4 id="stop-owl-video">stop.owl.video</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onStopVideo</code>
+  <br>
+</p>
+<p>When video has unloaded.</p>
+<hr>
+<h4 id="play-owl-video">play.owl.video</h4>
+<p>Type: <code>attachable</code>
+  <br>Callback: <code>onPlayVideo</code>
+  <br>
+</p>
+<p>When video has loaded.</p>
+<hr>
+</article>
+
+
+### Methods
+
+* prev ()
+```jsx
+<button onClick={() => this.refs.car.prev()}>prev</button>
+```
+
+* next ()
+```jsx
+<button onClick={() => this.refs.car.next()}>next</button>
+```
+
+* goTo (page)
+```jsx
+<button onClick={() => this.refs.car.goTo(0)}>goTo</button>
+```

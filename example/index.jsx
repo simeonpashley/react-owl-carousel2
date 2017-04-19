@@ -61,11 +61,17 @@ class App extends React.Component {
 			autoplay: this.state.autoplay
 		};
 
+		const events = {
+			onDragged: function(event) { console.log('onDragged: ' + event.type); },
+			onChanged: function(event) { console.log('onChanged: ' + event.type); }
+		};
+
 		return (
 			<div>
 				<OwlCarousel
 					ref="car"
 					options={options}
+					events={events}
 				>
 					{this.state.items}
 				</OwlCarousel>

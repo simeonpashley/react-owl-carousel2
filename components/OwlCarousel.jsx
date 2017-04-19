@@ -1,7 +1,8 @@
 'use strict';
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { findDOMNode } from 'react-dom';
+import PropTypes from 'prop-types';
 import '../src/owl.carousel.css';
 import '../src/owl.carousel.js';
 
@@ -100,7 +101,31 @@ const owlCarouselOptions = {
 	hash: [
 		'URLhashListener'
 	]
+};
 
+const owlCarouselEvents = {
+	core: [
+		'onInitialize',
+		'onInitialized',
+		'onResize',
+		'onResized',
+		'onRefresh',
+		'onRefreshed',
+		'onDrag',
+		'onDragged',
+		'onTranslate',
+		'onTranslated',
+		'onChange',
+		'onChanged'
+	],
+	lazy: [
+		'onLoadLazy',
+		'onLoadedLazy'
+	],
+	video: [
+		'onStopVideo',
+		'onPlayVideo'
+	]
 };
 
 class OwlCarousel extends React.Component {
@@ -138,9 +163,16 @@ class OwlCarousel extends React.Component {
 			.reduce((a, v) => a.concat(v), []);
 
 		carOptions.forEach(val => {
-			if (val in this.props.options) {
+			if (val in this.props.options)
 				options[val] = this.props.options[val];
-			}
+		});
+
+		let carEvents = Object.values(owlCarouselEvents)
+			.reduce((a, v) => a.concat(v), []);
+
+		carEvents.forEach(val => {
+			if (val in this.props.events)
+				options[val] = this.props.events[val];
 		});
 
 		return options;
@@ -149,6 +181,7 @@ class OwlCarousel extends React.Component {
 	render() {
 		const {
 			options,
+			events,
 			children,
 			...props,
 		} = this.props;
@@ -267,6 +300,30 @@ OwlCarousel.propTypes = {
 
 		// hash
 		URLhashListener: PropTypes.bool
+	}),
+
+	events: PropTypes.shape({
+		// core
+		onInitialize: PropTypes.func,
+		onInitialized: PropTypes.func,
+		onResize: PropTypes.func,
+		onResized: PropTypes.func,
+		onRefresh: PropTypes.func,
+		onRefreshed: PropTypes.func,
+		onDrag: PropTypes.func,
+		onDragged: PropTypes.func,
+		onTranslate: PropTypes.func,
+		onTranslated: PropTypes.func,
+		onChange: PropTypes.func,
+		onChanged: PropTypes.func,
+
+		// lazy
+		onLoadLazy: PropTypes.func,
+		onLoadedLazy: PropTypes.func,
+
+		// video
+		onStopVideo: PropTypes.func,
+		onPlayVideo: PropTypes.func
 	})
 };
 
