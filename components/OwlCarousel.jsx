@@ -327,4 +327,9 @@ OwlCarousel.propTypes = {
 	})
 };
 
+OwlCarousel.defaultProps = {
+	options: {},
+	events: {}
+};
+
 export default OwlCarousel;
