@@ -135,25 +135,40 @@ class OwlCarousel extends React.Component {
 		this.next = () => this.$car.next();
 		this.prev = () => this.$car.prev();
 		this.goTo = (x) => this.$car.to(x);
+
+		this.currentPosition = 0;
+		this.onTranslate = this.onTranslate.bind(this);
 	}
 
 	componentDidMount() {
 		this.$node = $(findDOMNode(this));
-		this.$node.owlCarousel(this.getOptions());
-		this.$car = this.$node.data('owl.carousel');
+		let options = this.getOptions();
+		this.init(options);
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.$node.data('owl.carousel').destroy();
+		this.destroy();
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		this.$node.owlCarousel(this.getOptions());
-		this.$car = this.$node.data('owl.carousel');
+		let options = this.getOptions();
+		options.startPosition = this.currentPosition;
+		this.init(options);
 	}
 
 	componentWillUnmount() {
-		this.$node.data('owl.carousel').destroy();
+		this.destroy();
+	}
+
+	init(options) {
+		let next = options.onTranslate;
+		options.onTranslate = this.onTranslate(next);
+		this.$node.owlCarousel(options);
+		this.$car = this.$node.data('owl.carousel');
+	}
+
+	destroy() {
+		this.$car.destroy();
 	}
 
 	getOptions() {
@@ -176,6 +191,12 @@ class OwlCarousel extends React.Component {
 		});
 
 		return options;
+	}
+
+	onTranslate = next => event => {
+		this.currentPosition = event.item.index;
+		if (next)
+			next(event);
 	}
 
 	render() {
@@ -325,6 +346,11 @@ OwlCarousel.propTypes = {
 		onStopVideo: PropTypes.func,
 		onPlayVideo: PropTypes.func
 	})
+};
+
+OwlCarousel.defaultProps = {
+	options: {},
+	events: {}
 };
 
 export default OwlCarousel;
