@@ -63,7 +63,8 @@ class App extends React.Component {
 
 		const events = {
 			onDragged: function(event) { console.log('onDragged: ' + event.type); },
-			onChanged: function(event) { console.log('onChanged: ' + event.type); }
+			onChanged: function(event) { console.log('onChanged: ' + event.type); },
+			onTranslate: function(event) { console.log('onTranslate: ' + event.type); }
 		};
 
 		return (
