@@ -293,8 +293,14 @@ OwlCarousel.propTypes = {
 		videoWidth: PropTypes.bool,
 
 		// animate
-		animateOut: PropTypes.bool,
-		animateIn: PropTypes.bool,
+		animateOut: PropTypes.oneOfType([
+			PropTypes.bool,
+			PropTypes.string,
+		]),
+		animateIn: PropTypes.oneOfType([
+			PropTypes.bool,
+			PropTypes.string,
+		]),
 
 		// autoplay
 		autoplay: PropTypes.bool,
