@@ -19,7 +19,7 @@ npm install react-owl-carousel2
 ```jsx
 import React from 'react';
 import OwlCarousel from 'react-owl-carousel2';
-import 'react-owl-carousel2/style.css';
+import 'react-owl-carousel2/style.css'; //Allows for server-side rendering.
 ```
 
 
