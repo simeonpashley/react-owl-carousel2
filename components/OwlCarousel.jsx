@@ -4,7 +4,6 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import '../src/owl.carousel.css';
-import '../src/owl.carousel.js';
 
 const owlCarouselOptions = {
 	core: [
@@ -141,7 +140,7 @@ class OwlCarousel extends React.Component {
 	}
 
 	componentDidMount() {
-		this.$node = $(findDOMNode(this));
+		require('../src/owl.carousel');
 		let options = this.getOptions();
 		this.init(options);
 	}
@@ -208,7 +207,7 @@ class OwlCarousel extends React.Component {
 		} = this.props;
 
 		return (
-			<div className='owl-carousel owl-theme' {...props}>
+			<div ref={(item) => this.$node = $(findDOMNode(item))} className='owl-carousel owl-theme' {...props}>
 				{children}
 			</div>
 		);

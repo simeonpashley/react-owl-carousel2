@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var minimize = process.argv.indexOf('--minimize') !== -1;
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var config = {
 	devtool: 'eval',
@@ -38,6 +39,7 @@ var config = {
 		},
 	},
 	plugins: [
+		new ExtractTextPlugin('styles.css'),
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.DefinePlugin({
 			'process.env': {
@@ -56,12 +58,11 @@ var config = {
 			},
 			{
 				test: /\.css$/,
-				loaders: [
+				loader: ExtractTextPlugin.extract(
 					'style-loader',
 					'css-loader',
 					'postcss-loader',
-				],
-				include: [path.join(__dirname, 'src')],
+				),
 			},
 		],
 
