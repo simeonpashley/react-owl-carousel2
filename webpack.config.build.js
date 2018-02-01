@@ -61,7 +61,7 @@ var config = {
 				loader: ExtractTextPlugin.extract(
 					'style-loader',
 					'css-loader',
-					'postcss-loader',
+					'postcss-loader'
 				),
 			},
 		],
