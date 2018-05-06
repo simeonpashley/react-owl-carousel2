@@ -1653,6 +1653,9 @@
 	 * @returns {Object} - The difference.
 	 */
 	Owl.prototype.difference = function(first, second) {
+    if (first === null || second === null) {
+      return {x: 0, y: 0};
+    }
 		return {
 			x: first.x - second.x,
 			y: first.y - second.y

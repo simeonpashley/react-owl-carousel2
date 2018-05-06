@@ -1,6 +1,6 @@
 {
   "name": "react-owl-carousel2",
-  "version": "0.3.0",
+  "version": "0.3.0sp",
   "description": "React.js + Owl Carousel 2",
   "author": "Florin Nitoi <florin.nitoi@gmail.com>",
   "license": "ISC",
@@ -16,13 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/florinn/react-owl-carousel2.git"
   },
-  "keywords": [
-    "react",
-    "carousel",
-    "OwlCarousel",
-    "slider",
-    "gallery"
-  ],
+  "keywords": ["react", "carousel", "OwlCarousel", "slider", "gallery"],
   "bugs": {
     "url": "https://github.com/florinn/react-owl-carousel2/issues"
   },
